@@ -1,19 +1,27 @@
 var towerOfHanoi = {
   activeDisk: null,
-  disks:['one','two','three','four','five'],
-  clickedTower: null
+  disks:['one','two','three','four','five','six','seven','eight'],
+  clickedTower: null,
+  numberOfDisks: 5,
+  numberOfClicks: null
 }
 $('.tower').on('click', function(){
-  clickedTower = $(this)
+  towerOfHanoi.clickedTower = $(this)
   diskClick($(this).children('.disk').eq(0));
 })
+$('#towerThree').on('click',function(){
+  if($(this).children().length == towerOfHanoi.numberOfDisks+1){
+    winScenario();//WIN!
+  }
+})
 function diskClick(clickedDisk) { //tower has been clicked
-  console.log(clickedDisk[0])
   if (towerOfHanoi.activeDisk == null && clickedDisk[0] != undefined) { //there is no disk that has been previously activated
-    clickedDisk.css('background','black'); //activate the first disk of the tower
+    clickedDisk.css('background','red'); //activate the first disk of the tower
     towerOfHanoi.activeDisk = clickedDisk; //store that as the active disk
   } else if (clickedDisk == towerOfHanoi.activeDisk){ //if I click the same disk again it should clear the selection
     clearDiskSelection();
+  } else if (towerOfHanoi.activeDisk == null && clickedDisk[0] == undefined) {
+    return false;
   } else { //this means you've clicked a different tower AND there is already a previously clicked tower stored
     var allowedMove = checkAllowedMove(clickedDisk); //check to see if the move is allowed
     if (allowedMove == true) {
@@ -25,17 +33,10 @@ function diskClick(clickedDisk) { //tower has been clicked
   }
 }
 function clearDiskSelection () {
-  towerOfHanoi.activeDisk.css('background','white')
+  towerOfHanoi.activeDisk.css('background','black')
   towerOfHanoi.activeDisk = null;
 }
 function checkAllowedMove(destinationTower) {
-  // if (destinationTower[0]==undefined) {
-  //   moveDisk(destinationTower);
-  // } else if (checkSizeofDisk(towerOfHanoi.activeDisk) < checkSizeofDisk(destinationTower)) {
-  //   moveDisk(destinationTower);
-  // } else {
-  //   clearDiskSelection();
-  // }
   if (destinationTower[0]==undefined) { //there is no disk in the tower destination
     return true;
   } else if (checkSizeofDisk(towerOfHanoi.activeDisk) < checkSizeofDisk(destinationTower)) { //there is a disk in the tower destination, and it is larger
@@ -48,15 +49,18 @@ function checkSizeofDisk(whichDisk) {
   return towerOfHanoi.disks.indexOf(whichDisk.attr('id'));
 }
 function moveDisk(destinationTower) {
-  console.log('apple')
-  console.log('dest : ' + destinationTower.parent().attr('id'));
-  console.log('div: ' +towerOfHanoi.activeDisk.attr('id'));
   if (destinationTower[0]==undefined) {
-    towerOfHanoi.activeDisk.appendTo(clickedTower);
+    towerOfHanoi.activeDisk.appendTo(towerOfHanoi.clickedTower);
+    towerOfHanoi.numberOfClicks++
+    console.log(towerOfHanoi.numberOfClicks)
     clearDiskSelection();
   } else {
     towerOfHanoi.activeDisk.prependTo(destinationTower.parent());
+    towerOfHanoi.numberOfClicks++
+    console.log(towerOfHanoi.numberOfClicks)
     clearDiskSelection();
-  // destinationTower.prepend(towerOfHanoi.activeDisk)
   }
+}
+function winScenario() {
+
 }

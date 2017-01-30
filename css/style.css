@@ -3,7 +3,7 @@ body {
   width:99vw;
   margin:0;
   padding:0;
-  background:auto;
+  background:black;
   display:flex;
   flex-direction:auto;
   justify-content: center;
@@ -19,13 +19,13 @@ body {
 }
 .towerBoard {
   display:flex;
-  background:white;
+  background:green;
   height:50vh;
   width:100vh;
 }
 
 .tower {
-  border:red 1px solid;
+  border:red 0px solid;
   width:33.33%;
   height:100%;
   box-sizing: border-box;
@@ -33,35 +33,46 @@ body {
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+  background: black;
 }
 .pole {
   height:100%;
   width:2vh;
-  background:black;
+  background:green;
   order: -1;
 }
 .disk {
-  height: 5vh;
+  height: 10%;
   border: red 1px solid;
   border-radius:1vh;
+  flex-shrink:0;
 }
-.sizeFive {
+#eight {
   width:90%;
 }
-.sizeFour {
+#seven {
   width:80%;
 }
-.sizeThree {
+#six {
   width:70%;
 }
-.sizeTwo {
+#five {
   width:60%;
 }
-.sizeOne {
+#four {
   width:50%;
+}
+#three {
+  width:40%;
+}
+#two {
+  width:30%;
+}
+#one {
+  width:20%;
 }
 .base {
   width:100vh;
-  background:black;
+  background:green;
   height:2.5vh;
 }
