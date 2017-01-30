@@ -3,8 +3,14 @@ var towerOfHanoi = {
   disks:['one','two','three','four','five'],
   clickedTower: null
 }
-$('.tower').on('click', function(){
-  clickedTower = $(this)
+$('.tower').on('mousedown', function(){
+  towerOfHanoi.clickedTower = $(this)
+  $(this).children('.disk').eq(0).draggable( {
+    containment: '.towerBoard',
+    cursor: 'move',
+    snap: 'true'
+  });
+  $(this).siblings().droppable();
   diskClick($(this).children('.disk').eq(0));
 })
 function diskClick(clickedDisk) { //tower has been clicked
@@ -52,7 +58,7 @@ function moveDisk(destinationTower) {
   console.log('dest : ' + destinationTower.parent().attr('id'));
   console.log('div: ' +towerOfHanoi.activeDisk.attr('id'));
   if (destinationTower[0]==undefined) {
-    towerOfHanoi.activeDisk.appendTo(clickedTower);
+    towerOfHanoi.activeDisk.appendTo(towerOfHanoi.clickedTower);
     clearDiskSelection();
   } else {
     towerOfHanoi.activeDisk.prependTo(destinationTower.parent());
