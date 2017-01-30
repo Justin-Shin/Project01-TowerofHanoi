@@ -1,0 +1,67 @@
+body {
+  height:99vh;
+  width:99vw;
+  margin:0;
+  padding:0;
+  background:auto;
+  display:flex;
+  flex-direction:auto;
+  justify-content: center;
+  align-items: center;
+}
+.gameBoard {
+  height:50vh;
+  width:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+}
+.towerBoard {
+  display:flex;
+  background:white;
+  height:50vh;
+  width:100vh;
+}
+
+.tower {
+  border:red 1px solid;
+  width:33.33%;
+  height:100%;
+  box-sizing: border-box;
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+.pole {
+  height:100%;
+  width:2vh;
+  background:black;
+  order: -1;
+}
+.disk {
+  height: 5vh;
+  border: red 1px solid;
+  border-radius:1vh;
+}
+.sizeFive {
+  width:90%;
+}
+.sizeFour {
+  width:80%;
+}
+.sizeThree {
+  width:70%;
+}
+.sizeTwo {
+  width:60%;
+}
+.sizeOne {
+  width:50%;
+}
+.base {
+  width:100vh;
+  background:black;
+  height:2.5vh;
+}
