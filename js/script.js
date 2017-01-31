@@ -3,7 +3,12 @@ var towerOfHanoi = {
   disks:['one','two','three','four','five','six','seven','eight'],
   clickedTower: null,
   numberOfDisks: 5,
-  numberOfClicks: null
+  numberOfClicks: null,
+  gameStarted: false,
+  playTimer: null,
+  timer: 0,
+  highScoreTimes: [],
+  highScoreMoves: []
 }
 $('.tower').on('click', function(){
   towerOfHanoi.clickedTower = $(this)
@@ -40,6 +45,19 @@ function diskClick(clickedDisk) { //tower has been clicked
     return false;
   } else { //this means you've clicked a different tower AND there is already a previously clicked tower stored
     var allowedMove = checkAllowedMove(clickedDisk); //check to see if the move is allowed
+      if(!towerOfHanoi.gameStarted){
+        towerOfHanoi.gameStarted = true;
+        towerOfHanoi.playTimer = setInterval(function(){
+        towerOfHanoi.timer++
+        var seconds = towerOfHanoi.timer % 10;
+        var tens = Math.floor(( towerOfHanoi.timer % 60 ) / 10);
+        var minutes = Math.floor( towerOfHanoi.timer / 60 ) % 10;
+        console.log(minutes);
+        var tensMinutes = Math.floor( towerOfHanoi.timer / 600 ) % 10;
+        console.log(tensMinutes);
+        $('.timer').text( tensMinutes+ minutes+ ":"+tens + seconds);
+        },1000)
+      }
     if (allowedMove == true) {
       moveDisk(clickedDisk);
     } else {
@@ -85,6 +103,11 @@ function reset() {
   towerOfHanoi.numberOfClicks = null;
   towerOfHanoi.activeDisk = null;
   towerOfHanoi.clickedTower = null;
+  towerOfHanoi.gameStarted= false;
+  clearInterval(towerOfHanoi.playTimer);
+  $('.timer').text('00:00')
+  $('.score').text('   0')
+  towerOfHanoi.timer= 0;
   for(i=0;i<towerOfHanoi.numberOfDisks;i++){
     var diskTemplate = '<div class="disk" '+'id='+ towerOfHanoi.disks[8-towerOfHanoi.numberOfDisks+i] + '></div>'
     $('#towerOne').append(diskTemplate);
