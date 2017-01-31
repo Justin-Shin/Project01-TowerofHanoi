@@ -7,8 +7,23 @@ var towerOfHanoi = {
   gameStarted: false,
   playTimer: null,
   timer: 0,
-  highScoreTimes: [],
-  highScoreMoves: []
+  highScoreTimes: [30,60,120,240,480,960],
+  highScoreMoves: [15,31,63,127,255,511],
+  populateScores: function() {
+    for (i=0; i<6; i++) {
+      for (j=0; j < 2 ; j++) {
+        // $('#scoreboard').children('ul').eq(i).children().eq(j)
+        switch (j) {
+          case 0:
+            $('#scoreboard').children('ul').eq(i).children().eq(j).text('Best Time: '+ parseToTime(towerOfHanoi.highScoreTimes[i]));
+            break;
+          case 1:
+            $('#scoreboard').children('ul').eq(i).children().eq(j).text('Fewest Moves: '+towerOfHanoi.highScoreMoves[i]);
+            break;
+        }
+      }
+    }
+  }
 }
 $('.tower').on('click', function(){
   towerOfHanoi.clickedTower = $(this)
@@ -52,9 +67,7 @@ function diskClick(clickedDisk) { //tower has been clicked
         var seconds = towerOfHanoi.timer % 10;
         var tens = Math.floor(( towerOfHanoi.timer % 60 ) / 10);
         var minutes = Math.floor( towerOfHanoi.timer / 60 ) % 10;
-        console.log(minutes);
         var tensMinutes = Math.floor( towerOfHanoi.timer / 600 ) % 10;
-        console.log(tensMinutes);
         $('.timer').text( tensMinutes+ minutes+ ":"+tens + seconds);
         },1000)
       }
@@ -96,7 +109,36 @@ function moveDisk(destinationTower) {
   }
 }
 function winScenario() {
-  console.log('you win!')
+  $('#youWinBanner').css('visibility','visible');
+  $('.gameBoard').css('pointer-events','none');
+  var scoreTime = towerOfHanoi.timer;
+  var scoreMove = towerOfHanoi.numberOfClicks;
+  if(towerOfHanoi.highScoreMoves[towerOfHanoi.numberOfDisks-3] < towerOfHanoi.scoreMove){
+    if(towerOfHanoi.scoreTime < towerOfHanoi.highScoreTimes[towerOfHanoi.numberOfDisks-3]){
+      towerOfHanoi.highScoreTimes[towerOfHanoi.numberOfDisks-3] = towerOfHanoi.scoreTime;
+      towerOfHanoi.highScoreMoves[towerOfHanoi.numberOfDisks-3] =towerOfHanoi.scoreMove;
+      youWin(true);
+      return false;
+    } else {
+      towerOfHanoi.highScoreMoves[towerOfHanoi.numberOfDisks-3] =towerOfHanoi.scoreMove
+      youWin(true);
+      return false;
+    }
+  } else if(scoreTime < towerOfHanoi.highScoreTimes[towerOfHanoi.numberOfDisks-3]) {
+      towerOfHanoi.highScoreTimes[towerOfHanoi.numberOfDisks-3] = towerOfHanoi.scoreTime;
+    youWin(true);
+  } else {
+    youWin(false);
+  }
+}
+function youWin(highScoreBreak) {
+  if (highScoreBreak){
+    $('.winContainer').children('h2').text('Congratulations, you beat a high score!')
+    towerOfHanoi.populateScores();
+  } else {
+    $('.winContainer').children('h2').text('Congratulations, you did it!')
+    towerOfHanoi.populateScores();
+  }
 }
 function reset() {
   $('.disk').remove();
@@ -114,3 +156,14 @@ function reset() {
   }
 
 }
+function parseToTime(secondsTotal) {
+  var seconds = secondsTotal % 10;
+  var tens = Math.floor(( secondsTotal % 60 ) / 10);
+  var minutes = Math.floor( secondsTotal / 60 ) % 10;
+  var tensMinutes = String(Math.floor( secondsTotal / 600 ) % 10);
+  console.log(tensMinutes)
+  console.log(tensMinutes + minutes + ":" + tens + seconds)
+  return tensMinutes + minutes + ":" + tens + seconds;
+
+}
+towerOfHanoi.populateScores();

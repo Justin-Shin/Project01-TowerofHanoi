@@ -118,6 +118,10 @@ body {
   justify-content: center;
   align-items: center;
 }
+.reset {
+  box-sizing: border-box;
+  border: rgba(0,0,0,0) 1px solid;
+}
 .reset:hover, .scoreboard:hover, .instructions:hover {
   background: rgb(154,240,167);
   color: black;
@@ -181,4 +185,33 @@ h2 {
 }
 p, li {
   font-size: 2.2vh;
+}
+.instructions, .scoreboard {
+  border-bottom:rgb(154,240,167) 2px solid;
+}
+#youWinBanner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,.9);
+  border: rgb(154,240,167) 2px solid;
+  width: 40%;
+  height:30%;
+  position:absolute;
+  top:35%;
+  left:30%;
+  font-family: Courier, serif;
+  color: rgb(154,240,167);
+  user-select: none;
+  font-size:3vh;
+  visibility:hidden;
+}
+.winContainer {
+  width:75%;
+  height:60%;
+  margin-bottom:2vh;
+}
+.winContainer>* {
+  text-align: center;
 }
