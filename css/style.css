@@ -126,7 +126,7 @@ body {
   background: rgb(154,240,167);
   color: black;
 }
-.reset:active, .scoreboard:active, .instructions:active {
+.reset:active, .set, .scoreboard:active, .instructions:active {
   background:black;
   color:rgb(154,240,167);
   border: rgb(154,240,167) 1px solid;
@@ -207,11 +207,48 @@ p, li {
   font-size:3vh;
   visibility:hidden;
 }
+#queryDiskNumber {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,.9);
+  border: rgb(154,240,167) 2px solid;
+  width: 40%;
+  height:30%;
+  position:absolute;
+  top:35%;
+  left:30%;
+  font-family: Courier, serif;
+  color: rgb(154,240,167);
+  user-select: none;
+  font-size:3vh;
+  visibility:visible;
+}
+input {
+  background: rgba(0,0,0,.9);
+  font-family: Courier, serif;
+  color: rgb(154,240,167);
+  border:none;
+  margin-top:2vh;
+  text-align:center;
+}
+.thingieImtoolazytoname {
+  width:70%;
+  text-align:center;
+}
 .winContainer {
   width:75%;
   height:60%;
   margin-bottom:2vh;
 }
 .winContainer>* {
+  text-align: center;
+}
+.set {
+  margin-top: 1vh;
+  border:rgb(154,240,167) solid 2px;
+  box-sizing: border-box;
+  width: 10vh;
   text-align: center;
 }
