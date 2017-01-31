@@ -11,9 +11,14 @@ var towerOfHanoi = {
   highScoreMoves: [15,31,63,127,255,511],
   setNumber: false,
   populateScores: function() {
+    if(sessionStorage.getItem('timeScore')){
+      towerOfHanoi.highScoreTimes = sessionStorage.getItem('timeScore').split(',');
+    }
+    if(sessionStorage.getItem('clickScore')){
+      towerOfHanoi.highScoreMoves = sessionStorage.getItem('clickScore').split(',');
+    }
     for (i=0; i<6; i++) {
       for (j=0; j < 2 ; j++) {
-        // $('#scoreboard').children('ul').eq(i).children().eq(j)
         switch (j) {
           case 0:
             $('#scoreboard').children('ul').eq(i).children().eq(j).text('Best Time: '+ parseToTime(towerOfHanoi.highScoreTimes[i]));
@@ -133,15 +138,19 @@ function winScenario() {
     if(scoreTime < towerOfHanoi.highScoreTimes[towerOfHanoi.numberOfDisks-3]){
       towerOfHanoi.highScoreTimes[towerOfHanoi.numberOfDisks-3] = scoreTime;
       towerOfHanoi.highScoreMoves[towerOfHanoi.numberOfDisks-3] = scoreMove;
+      sessionStorage.setItem('clickScore', towerOfHanoi.highScoreMoves);
+      sessionStorage.setItem('timeScore', towerOfHanoi.highScoreTimes);
       youWin(true);
       return false;
     } else {
       towerOfHanoi.highScoreMoves[towerOfHanoi.numberOfDisks-3] =scoreMove;
+      sessionStorage.setItem('clickScore', towerOfHanoi.highScoreMoves);
       youWin(true);
       return false;
     }
   } else if(scoreTime < towerOfHanoi.highScoreTimes[towerOfHanoi.numberOfDisks-3]) {
       towerOfHanoi.highScoreTimes[towerOfHanoi.numberOfDisks-3] = scoreTime;
+      sessionStorage.setItem('timeScore', towerOfHanoi.highScoreTimes);
     youWin(true);
   } else {
     youWin(false);
