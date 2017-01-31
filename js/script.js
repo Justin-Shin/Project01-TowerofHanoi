@@ -9,6 +9,7 @@ var towerOfHanoi = {
   timer: 0,
   highScoreTimes: [30,60,120,240,480,960],
   highScoreMoves: [15,31,63,127,255,511],
+  setNumber: false,
   populateScores: function() {
     for (i=0; i<6; i++) {
       for (j=0; j < 2 ; j++) {
@@ -26,8 +27,8 @@ var towerOfHanoi = {
   }
 }
 $('.set').on('click',function(){
-  if (2 < parseInt($('input').val()) < 9) {
-    towerOfHanoi.numberOfDisks = Math.floor(parseInt($('input').val()));
+  if (2 < parseInt($('input').val()) && parseInt($('input').val())< 9) {
+    towerOfHanoi.numberOfDisks = Math.floor($('input').val());
   } else if (parseInt($('input').val())< 3 ) {
     towerOfHanoi.numberOfDisks = 3;
   } else if (8 < parseInt($('input').val()) ) {
@@ -36,6 +37,7 @@ $('.set').on('click',function(){
     towerOfHanoi.numberOfDisks = 5;
   }
   $('#queryDiskNumber').css('visibility','hidden');
+  towerOfHanoi.setNumber=false;
   reset();
 })
 $('.tower').on('click', function(){
@@ -124,6 +126,7 @@ function moveDisk(destinationTower) {
 function winScenario() {
   $('#youWinBanner').css('visibility','visible');
   // $('.gameBoard').css('pointer-events','none');
+  clearInterval(towerOfHanoi.playTimer);
   var scoreTime = towerOfHanoi.timer;
   var scoreMove = towerOfHanoi.numberOfClicks;
   if(scoreMove < towerOfHanoi.highScoreMoves[towerOfHanoi.numberOfDisks-3]){
@@ -145,6 +148,7 @@ function winScenario() {
   }
 }
 function youWin(highScoreBreak) {
+  towerOfHanoi.setNumber = true;
   if (highScoreBreak){
     $('.winContainer').children('h2').text('Congratulations, you beat a high score!')
     towerOfHanoi.populateScores();
@@ -154,12 +158,15 @@ function youWin(highScoreBreak) {
   }
 }
 function reset() {
-  console.log('apple')
+  if (towerOfHanoi.setNumber){
+    $('#queryDiskNumber').css('visibility','visible')
+  }
   $('.disk').remove();
   towerOfHanoi.numberOfClicks = null;
   towerOfHanoi.activeDisk = null;
   towerOfHanoi.clickedTower = null;
   towerOfHanoi.gameStarted= false;
+  towerOfHanoi.setNumber=true;
   clearInterval(towerOfHanoi.playTimer);
   $('.timer').text('00:00')
   $('.score').text('   0')
@@ -176,9 +183,6 @@ function parseToTime(secondsTotal) {
   var tens = Math.floor(( secondsTotal % 60 ) / 10);
   var minutes = Math.floor( secondsTotal / 60 ) % 10;
   var tensMinutes = String(Math.floor( secondsTotal / 600 ) % 10);
-  console.log(tensMinutes)
-  console.log(tensMinutes + minutes + ":" + tens + seconds)
   return tensMinutes + minutes + ":" + tens + seconds;
-
 }
 towerOfHanoi.populateScores();
