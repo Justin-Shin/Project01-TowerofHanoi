@@ -5,7 +5,7 @@ body {
   padding:0;
   background:black;
   display:flex;
-  flex-direction:auto;
+  flex-direction:column;
   justify-content: center;
   align-items: center;
 }
@@ -16,10 +16,11 @@ body {
   flex-direction:column;
   justify-content: center;
   align-items: center;
+
 }
 .towerBoard {
   display:flex;
-  background:green;
+  background:rgb(130,241,149);
   height:50vh;
   width:100vh;
 }
@@ -38,7 +39,7 @@ body {
 .pole {
   height:100%;
   width:2vh;
-  background:green;
+  background:rgb(130,241,149);
   order: -1;
 }
 .disk {
@@ -73,6 +74,99 @@ body {
 }
 .base {
   width:100vh;
-  background:green;
+  background:rgb(130,241,149);
   height:2.5vh;
+}
+.topBar {
+  width:100%;
+  height: 5%;
+  color: rgb(154,240,167);
+  display:flex;
+  margin:0 auto;
+  justify-content:space-around;
+  position: absolute;
+  top: 0;
+  left:0;
+  font-family: Courier, serif;
+  user-select:none;
+  font-size:2.2vh;
+
+}
+.topBarFunction {
+  width: 30%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+.topBarFunction.otherThings {
+  width: 40%;
+}
+/*.topBar :not(:last-child) {
+  border-right: green solid 2px;
+}*/
+.instructions, .scoreboard, .scoreHolder, .timerHolder{
+  border-right: rgb(154,240,167) solid 2px;
+}
+
+.otherThings > *{
+  width:33.333333%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.reset:hover, .scoreboard:hover, .instructions:hover {
+  background: rgb(154,240,167);
+  color: black;
+}
+.reset:active, .scoreboard:active, .instructions:active {
+  background:black;
+  color:rgb(154,240,167);
+  border: rgb(154,240,167) 1px solid;
+  box-sizing: border-box;
+}
+.scoreHolder *, .timerHolder * {
+  border-right: none;
+  width:40%;
+  text-align:center;
+}
+.scoreHolder, .timerHolder {
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.score, .timer {
+  flex-shrink:2;
+  align-self: flex-end;
+}
+#instructions {
+  background: rgba(0,0,0,.9);
+  position: absolute;
+  top: 5%;
+  left:0%;
+  height: 95%;
+  width:100%;
+  visibility:hidden;
+}
+#scoreboard {
+  background: rgba(0,0,0,.9);
+  position: absolute;
+  top: 5%;
+  left:0%;
+  height: 95%;
+  width:100%;
+  visibility:hidden;
+}
+.overlays {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: rgb(154,240,167);
+  font-family: Courier, serif;
+}
+.instructionContainer{
+  width:70%;
+}
+h1 {
+  text-align:center;
 }

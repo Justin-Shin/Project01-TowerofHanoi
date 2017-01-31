@@ -14,6 +14,22 @@ $('#towerThree').on('click',function(){
     winScenario();//WIN!
   }
 })
+$('.topBar').children(':not(:last-child)').on('click',function(){
+  var overlayObject = $('#'+$(this).attr('class').split(" ")[0]);
+  if(overlayObject.css('visibility')=='hidden') {
+    overlayObject.css('visibility','visible');
+    $(this).siblings().css('border-bottom','rgb(154,240,167) solid 2px');
+    $(this).css('border-bottom','none');
+    overlayObject.siblings('.overlays').css('visibility','hidden');
+  } else {
+    overlayObject.css('visibility','hidden');
+    $('.otherThings').siblings().css('border-bottom','rgb(154,240,167) solid 2px');
+    $('.otherThings').css('border-bottom','none');
+
+  }
+})
+$('.reset').on('click',reset);
+
 function diskClick(clickedDisk) { //tower has been clicked
   if (towerOfHanoi.activeDisk == null && clickedDisk[0] != undefined) { //there is no disk that has been previously activated
     clickedDisk.css('background','red'); //activate the first disk of the tower
@@ -52,15 +68,26 @@ function moveDisk(destinationTower) {
   if (destinationTower[0]==undefined) {
     towerOfHanoi.activeDisk.appendTo(towerOfHanoi.clickedTower);
     towerOfHanoi.numberOfClicks++
-    console.log(towerOfHanoi.numberOfClicks)
+    $('.score').text(towerOfHanoi.numberOfClicks)
     clearDiskSelection();
   } else {
     towerOfHanoi.activeDisk.prependTo(destinationTower.parent());
     towerOfHanoi.numberOfClicks++
-    console.log(towerOfHanoi.numberOfClicks)
+    $('.score').text(towerOfHanoi.numberOfClicks)
     clearDiskSelection();
   }
 }
 function winScenario() {
+  console.log('you win!')
+}
+function reset() {
+  $('.disk').remove();
+  towerOfHanoi.numberOfClicks = null;
+  towerOfHanoi.activeDisk = null;
+  towerOfHanoi.clickedTower = null;
+  for(i=0;i<towerOfHanoi.numberOfDisks;i++){
+    var diskTemplate = '<div class="disk" '+'id='+ towerOfHanoi.disks[8-towerOfHanoi.numberOfDisks+i] + '></div>'
+    $('#towerOne').append(diskTemplate);
+  }
 
 }

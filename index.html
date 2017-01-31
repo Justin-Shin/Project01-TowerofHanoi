@@ -2,10 +2,26 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Tower of Hanoi</title>
   </head>
   <body>
+    <div class = "topBar">
+      <div class = "instructions topBarFunction">Rules and Instructions</div>
+      <div class = "scoreboard topBarFunction">Scoreboard</div>
+      <div class = "otherThings topBarFunction">
+        <div class = "scoreHolder">
+          <div class = "barHolder">Moves: </div>
+          <div class="score">  0</div>
+        </div>
+        <div class = "timerHolder">
+          <div class = "barHolder">Time: </div>
+          <div class="timer">00:00</div>
+        </div>
+        <div class = "reset">Reset</div>
+      </div>
+    </div>
     <div class ="gameBoard">
       <div class="towerBoard">
         <div id="towerOne" class="tower">
@@ -25,6 +41,19 @@
       </div>
       <div class="base"></base>
     </div>
+    <div id = "instructions" class="overlays">
+      <div class="instructionContainer">
+        <h1>The Tower of Hanoi</h1>
+        <p>The Tower of Hanoi (also called the Tower of Brahma or Lucas' Tower, and sometimes pluralized) is a mathematical game or puzzle. It consists of three rods, and a number of disks of different sizes which can slide onto any rod. The puzzle starts with the disks in a neat stack in ascending order of size on one rod, the smallest at the top, thus making a conical shape.</p>
+        <h1>Rules</h1>
+        <ol>
+          <li>Only one disk can be moved at a time.</li>
+          <li>Each move consists of taking the upper disk from one of the stacks and placing it on top of another stack i.e. a disk can only be moved if it is the uppermost disk on a stack.</li>
+          <li>No disk may be placed on top of a smaller disk.</li>
+        </ol>
+      </div>
+    </div>
+    <div id = "scoreboard" class="overlays"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="js/script.js" charset="utf-8"></script>
   </body>
